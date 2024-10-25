@@ -48,4 +48,20 @@ const getSingleProduct = async (req, res) => {
   }
 };
 
-module.exports = { createProduct, getAllProducts, getSingleProduct };
+// Delete product by ID
+const deleteProduct = async (req, res) => {
+  try {
+    const { product_id } = req.body;
+    const product = await Product.findByIdAndDelete(product_id);
+    if (product) {
+      res.status(200).json({ message: 'Product deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Product not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting product', error: error.message });
+  }
+};
+
+module.exports = { createProduct, getAllProducts, getSingleProduct, deleteProduct };
+

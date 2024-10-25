@@ -7,8 +7,14 @@ const productRouter = require('./routes/productRoute');
 const authRouter = require("./routes/authRoute");
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 const billingRouter = require('./routes/billingRoute');
-const cartRouter = require("./routes/cartRoute");
+const cartRouter = require("./routes/cartRoute"); // Import cartRouter
+
+const userRoutes = require('./routes/userRoutes');
+
+
+
 const cors = require('cors');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -24,11 +30,11 @@ app.use(cookieParser());
 app.use(cors());
 
 // Routes
-app.use("/api/product", productRouter);
+app.use('/api/products', productRouter);
 app.use("/api/user", authRouter);
-app.use("/api/billing", billingRouter); 
-app.use("/api/cart", cartRouter);
-
+app.use("/api/billing", billingRouter);
+app.use("/api/cart", cartRouter); // Use cartRouter
+app.use('/', userRoutes); 
 
 
 // Error Handlers
