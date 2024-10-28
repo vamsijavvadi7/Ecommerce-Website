@@ -1,15 +1,15 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner"; // Import the loading spinner
-
-const AuthContext = createContext();
+import { auth } from "../firebase";
+export const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [presentUser, setPresentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState({});
   
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -21,8 +21,26 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+
+//use this if you want to call a api to get products info
+//similary you can use your productsData 
+
+  useEffect(() => {
+   
+   
+
+    // Fetch product data
+    fetch('https://dummyjson.com/products')
+        .then(res => res.json()) // Await for JSON parsing
+        .then(data => setProduct(data)) // Set the parsed data to state
+        .catch(error => console.error('Error fetching products:', error));
+
+  
+}, []);
+
+
   return (
-    <AuthContext.Provider value={{ presentUser }}>
+    <AuthContext.Provider value={{ presentUser, product }}>
       {loading ? <LoadingSpinner /> : children}
     </AuthContext.Provider>
   );

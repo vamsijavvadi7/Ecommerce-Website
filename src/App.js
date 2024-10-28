@@ -1,15 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthProvider";
-import Navbar from "./components/Navbar";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import LoginPage from "./Authentication/LoginPage";
+import ProtectedRoute from "./Authentication/ProtectedRoute";
 import SignUpPage from "./Authentication/SignUpPage";
-import OfferGrid from "./components/OfferGrid";
-import CategorySection from "./components/SegmentationSection";
-import ProductCard from "./components/ProductCard";
-import ProfilePage from "./components/Profilepage";
 import Categories from "./components/categoryBar";
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import OfferGrid from "./components/OfferGrid";
+import ProductCard from "./components/ProductCard";
+import ProfilePage from "./components/Profilepage";
+import CategorySection from "./components/SegmentationSection";
+import { AuthProvider } from "./contexts/AuthProvider";
 
 const App = () => {
   return (
@@ -23,10 +24,10 @@ const App = () => {
               <Route
                 path="/"
                 element={
-                  <>
+                  <ProtectedRoute>
                     <Categories />
                     <OfferGrid />
-                  </>
+                  </ProtectedRoute>
                 }
               />
               <Route path="/shop" element={<CategorySection />} />
