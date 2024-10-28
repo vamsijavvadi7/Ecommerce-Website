@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
    
    
 
-    // Fetch product data
+    // Replace with mongodb link to fetch products
     fetch('https://dummyjson.com/products')
         .then(res => res.json()) // Await for JSON parsing
         .then(data => setProduct(data)) // Set the parsed data to state

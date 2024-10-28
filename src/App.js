@@ -24,6 +24,9 @@ const App = () => {
               <Route
                 path="/"
                 element={
+
+                  // Similary wrap with ProtectedRoute in other routes if redirect to login is needed
+
                   <ProtectedRoute>
                     <Categories />
                     <OfferGrid />

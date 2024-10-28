@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import React, { useEffect, useState } from "react";
 import { auth, storage } from "../firebase";
 import defaultProfilePic from "../Images/p8.png";
 import {
-  ProfileContainer,
-  StyledProfileName,
-  ProfileHeader,
-  ProfileImageContainer,
-  ProfileImage,
   EditOverlay,
-  HiddenFileInput,
-  ProfileDetails,
-  ProfileName,
   GridContainer,
   GridItem,
+  HiddenFileInput,
+  ProfileContainer,
+  ProfileDetails,
+  ProfileHeader,
+  ProfileImage,
+  ProfileImageContainer,
+  ProfileName,
+  StyledProfileName,
 } from "../StyledComponents/ProfilePageStyles";
 
 const ProfilePage = () => {
@@ -25,6 +25,7 @@ const ProfilePage = () => {
     const user = auth.currentUser;
     if (user) {
       // Fetch the email and name from Firebase Auth
+      console.log(user);
       setEmail(user.email);
       setName(user.displayName || "Add your name");
 
